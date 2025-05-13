@@ -1,0 +1,26 @@
+{
+  "elements": {
+    "homepage": {
+      "homepageLoginBtn": ".Header2_header__nav__btn__wRKfY>div:nth-child(1)>button",
+      "homepageSignupBtn": ".Header2_header__nav__btn__wRKfY>div:nth-child(2)>button"
+    },
+    "signupPage": {
+      "fullnameField": "#fullname",
+      "businessnameField": "#businessname",
+      "businessEmailField": "#businessemail",
+      "businessphoneField": "#businessphonenumber",
+      "BusinessRegNumField": "#businessRegNum",
+      "button": "button",
+      "websiteField": "#website",
+      "instagramField": "#instagramHandle",
+      "twitterField": "#twitterHandle",
+      "passwordField": "#password",
+      "howYouHeardAboutUs": "div[placeholder]"
+    },
+    "loginPage": {
+      "emailAddressField": "#email",
+      "passwordField": "#password",
+      "button": "button"
+    }
+  }
+}
