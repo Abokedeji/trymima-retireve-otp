@@ -16,6 +16,8 @@
       "twitterField": "#twitterHandle",
       "passwordField": "#password",
       "howYouHeardAboutUs": "div[placeholder]"
+      
+      
     },
     "loginPage": {
       "emailAddressField": "#email",

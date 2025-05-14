@@ -34,7 +34,10 @@ Cypress.Commands.add('retrieveAndInsertOTP', () => {
         const firstCode = email.html.codes[0]
         const otp = firstCode.value
         cy.log(otp)
+        cy.get('input').each(($el, index) => {
+            cy.wrap($el).type(otp[index])
     })
+})
 });
 
 Cypress.Commands.add('CompleteSignupForm', () => {
