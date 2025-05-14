@@ -53,3 +53,45 @@ Cypress.Commands.add('CompleteSignupForm', () => {
     cy.get(signupPage.passwordField).fill('Test@1234');
     cy.get(signupPage.button).click();
  })
+
+ Cypress.Commands.add('fillBasicDetails', () => {
+    cy.get(signupPage.fullnameField).fill(faker.person.fullName());
+    cy.get(signupPage.businessnameField).fill(faker.company.name());
+    cy.get(signupPage.businessEmailField).fill(creds.email);
+    cy.wait(5000)
+    cy.get(signupPage.businessphoneField).fill(faker.phone.number({style: 'international'}));
+
+})
+
+Cypress.Commands.add('fillOptionalField', (option) => {
+    if(option === 'Business Registration Number'){
+        cy.get(signupPage.BusinessRegNumField).fill(faker.string.numeric({length: {min: 5, max: 7}}));
+    } 
+    else if(option === 'Website'){
+        cy.get(signupPage.websiteField).fill(faker.internet.domainName());
+    }
+    else if(option === 'Instagram handle'){
+        cy.get(signupPage.instagramField).fill('@mankeTest');
+    } 
+    else if(option === 'Twitter handle'){
+        cy.get(signupPage.twitterField).fill('@mankeTest');
+    }
+    else{
+        throw new Error('Invalid option provided');
+    }
+})
+
+
+
+
+Cypress.Commands.add('Button', () => {
+    cy.get(signupPage.button).click();
+})
+
+Cypress.Commands.add('otherActions', () => {
+    cy.get(signupPage.howYouHeardAboutUs).click();
+    cy.get('#scrollableDiv').contains('Twitter').scrollIntoView().click();
+    cy.get(signupPage.passwordField).fill('Test@1234');
+    cy.get(signupPage.button).click();
+})
+

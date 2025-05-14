@@ -9,3 +9,6 @@ node_modules/
 # Cypress reports
 cypress/videos/
 cypress/screenshots/
+
+# Cypress config
+cypress.env.json

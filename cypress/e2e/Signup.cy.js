@@ -6,8 +6,13 @@ describe('Signup', () => {
         cy.retrieveAndInsertOTP()
     });
 
-    it('Signup filling one optional field - Business Registration Number', () => {
-        
+    it.only('Signup filling one optional field - Business Registration Number', () => {
+        cy.clickSignupButton()
+        cy.fillBasicDetails()
+        cy.fillOptionalField('Business Registration Number')
+        cy.Button()
+        cy.otherActions()
+        cy.retrieveAndInsertOTP()
     });
 
     it('Signup filling one optional field - Instagram handle', () => {
