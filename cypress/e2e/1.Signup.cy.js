@@ -1,6 +1,6 @@
 
 describe('Signup', () => {
-    it.only('Signup filling all optional fields', () => {
+    it('Signup filling all optional fields', () => {
         cy.clickSignupButton()
         cy.CompleteSignupForm()
         cy.retrieveAndInsertOTP()
