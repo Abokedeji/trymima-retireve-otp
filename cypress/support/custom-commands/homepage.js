@@ -9,3 +9,7 @@ before(()=>{
 Cypress.Commands.add('clickSignupButton', ()=> {
     cy.get(homepage.homepageSignupBtn).click()
 });
+
+Cypress.Commands.add('clickLoginButton', ()=> {
+    cy.get(homepage.homepageLoginBtn).click()
+});
