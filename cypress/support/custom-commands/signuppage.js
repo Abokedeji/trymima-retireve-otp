@@ -7,7 +7,10 @@ let emailAddress
 
 import { faker } from "@faker-js/faker/locale/en_NG"
 
-before(()=>{
+
+
+beforeEach(()=>{
+    // cy.task('generateEmailFile')
     const checker = new Date().getTime();
     const emailSuffix = checker.toString().substring(6,13)
     const emailPrefix = `test${emailSuffix}`
@@ -17,15 +20,18 @@ before(()=>{
     }
 
     cy.writeFile('cypress/fixtures/userDetails.json', JSON.stringify(userDetails, null, 2))
+    cy.on('uncaught:exception',()=>{
+        return false
+    })
+    cy.visit('/');
 
     cy.fixture('elements').then(sel=>{
         homepage = sel.elements.homepage
         signupPage = sel.elements.signupPage
     })
-    cy.fixture('userDetails').then(user=>{
-        creds = user
-    })
 })
+
+
 
 Cypress.Commands.add('retrieveAndInsertOTP', () => {
     cy.mailosaurGetMessage(serverID, { 
@@ -41,10 +47,11 @@ Cypress.Commands.add('retrieveAndInsertOTP', () => {
 });
 
 Cypress.Commands.add('CompleteSignupForm', () => {
+    cy.reloadFixture('userDetails').then(user=>{
     cy.get(signupPage.fullnameField).fill(faker.person.fullName());
     cy.get(signupPage.businessnameField).fill(faker.company.name());
-    cy.get(signupPage.businessEmailField).fill(creds.email);
-    cy.wait(5000)
+    cy.get(signupPage.businessEmailField).fill(user.email);
+    
     cy.get(signupPage.businessphoneField).fill(faker.phone.number({style: 'international'}));
     cy.get(signupPage.BusinessRegNumField).fill(faker.string.numeric({length: {min: 5, max: 7}}));
     cy.get(signupPage.button).click();
@@ -55,14 +62,30 @@ Cypress.Commands.add('CompleteSignupForm', () => {
     cy.get('#scrollableDiv').contains('Twitter').scrollIntoView().click();
     cy.get(signupPage.passwordField).fill('Test@1234');
     cy.get(signupPage.button).click();
+
+    })
+    cy.saveLoginEmail()
+   
  })
 
+Cypress.Commands.add('saveLoginEmail', ()=> {  
+    cy.readFile('cypress/fixtures/userDetails.json').then((userDetails) => {
+        cy.writeFile('cypress/fixtures/userLogin.json', JSON.stringify(userDetails, null, 2))
+    })
+  })
+
+Cypress.Commands.add('reloadFixture', (file)=>{
+    return cy.readFile(`cypress/fixtures/${file}.json`)
+})
+
  Cypress.Commands.add('fillBasicDetails', () => {
+    cy.reloadFixture('userDetails').then(user=>{
     cy.get(signupPage.fullnameField).fill(faker.person.fullName());
     cy.get(signupPage.businessnameField).fill(faker.company.name());
-    cy.get(signupPage.businessEmailField).fill(creds.email);
-    cy.wait(5000)
+    cy.get(signupPage.businessEmailField).fill(user.email);
+    
     cy.get(signupPage.businessphoneField).fill(faker.phone.number({style: 'international'}));
+    })
 
 })
 

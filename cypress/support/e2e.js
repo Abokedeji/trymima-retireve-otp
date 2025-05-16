@@ -9,12 +9,9 @@ import '@faker-js/faker';
 import 'cypress-mailosaur';
 import 'cypress-fill-command'
 
-beforeEach(()=>{
-    cy.on('uncaught:exception',()=>{
-        return false
-    })
-    cy.visit('/');
-})
+
+
+
 
 
             
