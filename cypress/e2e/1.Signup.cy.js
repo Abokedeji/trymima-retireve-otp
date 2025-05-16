@@ -1,6 +1,6 @@
 
 describe('Signup', () => {
-    it('Signup filling all optional fields', () => {
+    it.only('Signup filling all optional fields', () => {
         cy.clickSignupButton()
         cy.CompleteSignupForm()
         cy.retrieveAndInsertOTP()
@@ -34,7 +34,7 @@ describe('Signup', () => {
         cy.retrieveAndInsertOTP()
     });
 
-    it.only('Signup filling one optional field - Twitter handle', () => {
+    it('Signup filling one optional field - Twitter handle', () => {
         cy.clickSignupButton()
         cy.fillBasicDetails()
         cy.Button()
